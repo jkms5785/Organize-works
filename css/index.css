@@ -1,0 +1,280 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600;700;800;900&display=swap');
+
+@import url('https://spoqa.github.io/spoqa-han-sans/css/SpoqaHanSansNeo.css');
+
+html {
+    height: 100%;
+}
+
+body {
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+.cont {
+    max-width: 1040px;
+    display: flex;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    border: 0.1px solid gray;
+}
+
+.cont-left {
+    width: 100%;
+    margin-left: 2.3076923%;
+    /* 24px */
+    margin-right: 1.5384615%;
+    /* 16px */
+    border: 0.1px solid gray;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.cont-left-btn {
+    max-width: 408px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    cursor: pointer;
+}
+
+.memo-btn-cont {
+    display: flex;
+    align-items: center;
+}
+
+.btn-cont {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 12px;
+}
+
+.cont-right {
+    border: 0.1px solid gray;
+    width: 100%;
+    margin-right: 2.3076923%;
+    /* 24px */
+    margin-left: 1.5384615%;
+    /* 16px */
+    display: flex;
+    flex-direction: column;
+}
+
+.cont-right ul {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.cont-right-btn {
+    display: flex;
+    justify-content: flex-end;
+}
+
+textarea {
+    resize: none;
+    outline: none;
+    border: none;
+    padding: 0;
+}
+
+input {
+    outline: none;
+    border: none;
+    display: inline-block;
+    word-wrap: break-word;
+}
+
+button {
+    outline: none;
+    border: none;
+    cursor: pointer;
+}
+
+.cont-right ul li {
+    display: flex;
+    box-sizing: border-box;
+    padding: 20px 24px;
+    border-radius: 12px;
+    background-Color: rgba(39, 39, 39, 0.02);
+    margin-bottom: 16px;
+}
+
+.txtarea-cont1 {
+    box-sizing: border-box;
+    max-width: 408px;
+    padding: 18px 28px;
+    border-radius: 12px;
+    margin-top: 40px;
+    border: 0.1px solid gray;
+}
+
+.txtarea1 {
+    box-sizing: border-box;
+    width: 100%;
+    border-radius: 8px;
+    padding-top: 6px;
+}
+
+.txtarea-cont2 {
+    max-width: 408px;
+    margin-top: 16px;
+    display: flex;
+    align-items: center;
+    border: 0.1px solid gray;
+}
+
+.txtarea-cont2-1 {
+    box-sizing: border-box;
+    width: 100%;
+    padding-top: 18px;
+    padding-bottom: 16px;
+    padding-left: 28px;
+    padding-right: 28px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    border: 0.1px solid gray;
+}
+
+.txtarea2 {
+    box-sizing: border-box;
+    width: 100%;
+    border-radius: 8px;
+    /* padding-top: 5px; */
+    /* padding-bottom: 1px; */
+}
+
+.btn1 {
+    display: inline-block;
+    width: 24px;
+    height: 24px;
+    background-color: #272727;
+    opacity: 0.4;
+}
+
+.btn2 {
+    box-sizing: border-box;
+    padding-left: 24px;
+    padding-right: 24px;
+    padding-top: 10px;
+    padding-bottom: 9px;
+    border-radius: 12px;
+    background-color: #272727;
+}
+
+.todo-title {
+    padding-top: 5px;
+    padding-bottom: 1px;
+}
+
+.todo-memo {
+    margin-top: 10px;
+}
+
+/* txt */
+
+p {
+    display: inline-block;
+    word-wrap: break-word;
+}
+
+.-h1 {
+    font-family: 'Inter', 'sans-serif';
+    font-size: 40px;
+    font-weight: 800;
+    line-height: 50px;
+    letter-spacing: -0.6px;
+}
+
+.-h2 {
+    background-color: rgba(0, 0, 0, 0.1);
+    font-family: 'Spoqa Han Sans Neo', 'sans-serif';
+    font-size: 16px;
+    line-height: 26px;
+    letter-spacing: -0.4px;
+    font-weight: bold;
+}
+
+.-body1 {
+    font-family: 'Spoqa Han Sans Neo', 'sans-serif';
+    font-size: 14px;
+    font-weight: medium;
+    letter-spacing: -0.6px;
+    line-height: 26px;
+}
+
+.-btn-txt {
+    font-family: 'Inter', 'sans-serif';
+    font-weight: 600;
+    font-size: 16px;
+    letter-spacing: -0.4px;
+    line-height: 20px;
+
+    box-sizing: border-box;
+    padding-top: 4px;
+    padding-bottom: 5px;
+}
+
+.-date {
+    font-family: 'Inter', 'sans-serif';
+    font-weight: 600;
+    font-size: 16px;
+    letter-spacing: -0.4px;
+    line-height: 26px;
+
+    box-sizing: border-box;
+    margin-bottom: 10px;
+    background-color: rgba(0, 0, 0, 0.2);
+}
+
+/* coloor */
+
+.-black00 {
+    color: #272727;
+}
+
+.-black01 {
+    color: #797979;
+}
+
+.-black02 {
+    color: #dbdbdb;
+}
+
+.-white {
+    color: #FFFFFF;
+}
+
+.--surface1 {
+    background: rgba(0, 0, 0, 0.02);
+}
+
+/* javaScript */
+
+.icon {
+    background-color: gray;
+    width: 32px;
+    height: 32px;
+    margin-right: 16px;
+}
+
+.txt-cont {
+    display: flex;
+    flex-direction: column;
+}
+
+.hide {
+    display: none;
+}
+
+.test {
+    border: 0.1px solid rgba(0, 0, 0, 0.03);
+}

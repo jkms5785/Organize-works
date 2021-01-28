@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/index.css">
+    <title>Work</title>
+</head>
+
+<body>
+    <div class="cont">
+        <div class="cont-left">
+            <div class="-h1 -black00">
+                123<br>
+                456
+            </div>
+
+            <div class="txtarea-cont1 --surface1">
+                <textarea id="js-txtarea" class="txtarea1 -h2"></textarea>
+            </div>
+
+            <!--memo -->
+            <ul id="js-memo-cont"></ul>
+
+            <div class="cont-left-btn">
+                <div class="btn-cont">
+                    <span id="js-memo-btn" class="memo-btn-cont">
+                        <p class="-btn-txt -black00">Add Memo</p>
+                        <span class="btn1">+</span>
+                    </span>
+                    <span>
+                        <button id="js-push-btn" class="btn2">
+                            <p class="-btn-txt -white">Add Task</p>
+                        </button>
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <div class="cont-right">
+            <div>
+                <div id="js-date" class="-date">date</div>
+                <!-- date/todo 데이터 구조 다시 짜기 -->
+                <!-- todo 편집 기능 -->
+                <!-- 완료한 - todo 보는 항목 -->
+                <ul id="js-todo-cont"></ul>
+            </div>
+
+            <div class="cont-right-btn">
+                <button id="js-delAll-btn" class="btn2">
+                    <p class="-btn-txt -white">모두지우기</p>
+                </button>
+                <button id="js-edit-btn" class="btn2">
+                    <p class="-btn-txt -white">Edit Task</p>
+                </button>
+            </div>
+        </div>
+    </div>
+    
+    <script src="js/index.js"></script>
+    <script src="js/memo.js"></script>
+    <script src="js/date.js"></script>
+    <script src="js/canvas.js"></script>
+</body>
+
+</html>
