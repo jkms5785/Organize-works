@@ -48,71 +48,31 @@ if (scaleFactor > 1) {
 
 function canvasHide() {
     canvas.style.opacity = "1.0";
-
     // setTimeout(() => {
     //     canvas.style.opacity = "0";
     //     canvas.style.zIndex = "-9999";
     // }, 1200);
 }
 
-
 const makeRanNum = (max, min) => {
     return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
-
 // 3. canavas 그리기
-function makeCanvas() {
-    let c = ctx;
-    let s = scaleFactor;
+// function makeCanvas() {
+//     let c = ctx;
+//     let s = scaleFactor;
 
-    console.log(c);
+//     c.fillStyle = 'rgba(0, 0, 200, 0.5)';
+//     c.fillRect(0, 0, window.innerWidth * s, window.innerHeight * s);
+// }
 
-
-    // Rect 그리기
-    // let Cx = ClueX + ClueWidth / 2,
-    //     Cy = ClueY + ClueHeight / 2,
-    //     Cwidth = 220,
-    //     Cmargin = 32;
-
-    // let X = Cx - (Cwidth / 2 + Cmargin) * s,
-    //     Y = Cy - (Cwidth / 2 + Cmargin) * s,
-    //     width = (Cwidth + Cmargin * 2) * s;
-
-    c.fillStyle = 'rgba(0, 0, 0, 1.0)';
-    // c.fillRect(0, 0, window.innerWidth * s, window.innerHeight * s);
-    // c.clearRect(100, 100, 400, 400);
-
-    let icon_Xpos = makeRanNum(window.innerWidth, 0);
-    icon_Ypos = window.innerHeight - 200;
-    console.log(icon_Xpos, icon_Ypos);
-
-    // let icon = `🔥`; // icon 데이터 받기
-    // c.font = `80px Roboto`;
-
-    for(let i = 0; i < makeRanNum(30,10); i++){
-         c.fillText(icon, icon_Xpos, icon_Ypos);
-    }  
-    // Click txt 그리기 
-    // let font = "700 32px Montserrat, 'san-selif'",
-    //     message = "Click",
-    //     fontX = X + width / 2,
-    //     fontY = Y + width,
-    //     fontMargin = 32 * s;
-
-    // c.fillStyle = "rgba(255, 255, 255, 1.0)";
-    // c.textAlign = "center";
-    // c.textBaseline = "Top";
-    // c.font = font;
-    // c.fillText(message, fontX, fontY + fontMargin);
-}
-makeCanvas();
+// makeCanvas();
 // resize 좌표 유지
-window.addEventListener("resize", makeCanvas);
+// window.addEventListener("resize", makeCanvas);
 
 // // canvas 그리기
 // const preloader_Out = document.querySelector(`#js-preloader`);
-
 // function transitionedCheck(e) {
 //     if (e.target.style.transform == `translateY(200%)`) {
 //         preloader_Out.removeEventListener(`transitionend`, transitionedCheck);
@@ -125,98 +85,70 @@ window.addEventListener("resize", makeCanvas);
 
 // preloader_Out.addEventListener(`transitionend`, transitionedCheck);
 
-
 let iconArry = [];
-let icon;
-let speed;
+let iconNum = 48;
+let limit = 64;
 
-for (let i = 0; makeRanNum(30,10); i++){
+class makeIcon {
+    constructor(x, y, dx, dy, acceleration, txt, direction) {
+        this._x = x
+        this._y = y
+        this._dx = dx
+        this._dy = dy
+        this._acceleration = acceleration
+        this._txt = txt
+        this._c = x
+        this._direction = direction
+    }
 
-}
+    draw() {
+        ctx.font = `120px Roboto`;
+        ctx.fillText(this._txt, this._x, this._y)
+    }
 
-class icon {
-    constructor(x){
-        this._x = makeRanNum(window.innerWidth, 0);
-        this._y = window.innerHeight + 30;
-        this._txt = `🔥`,
+    update() {
+        this._y -= this._dy * this._acceleration
+
+        if (this._x < this._c - limit) {
+            this._direction = 1;
+        } else if (this._x > this._c + limit) {
+            this._direction = -1;
+        }
+
+        this._x = this._x + (this._dx * this._direction);
+
+        this.draw();
     }
 }
 
-// let ballsArr = []
-// var ball;
-// var gravity = 1.5;
-// var friction = 0.8;
-// var bounce = 0.8;
-// let ballWidth = 32;
+const iconPush = () => {
+    let s = scaleFactor;
 
-// function ballTank() {
-//     ballsArr = []
-// }
+    for (let i = 0; i < iconNum; i++) {
+        let x = makeRanNum(window.innerWidth * s, 0),
+            y = makeRanNum(window.innerHeight * s + 500, window.innerHeight * s),
+            dx = makeRanNum(4, 8),
+            dy = makeRanNum(6, 12),
+            acceleration = 1.5,
+            txt = `🔥`, // icon 받아올 자리
+            direction = 1;
+9.8 - 19.2 - 28.8
+        iconArry.push(new makeIcon(x, y, dx, dy, acceleration, txt, direction));
+    }
+    console.log(iconArry);
+}
 
-// ballTank();
+iconPush();
 
-// function init2() {
-//     console.log(canvas.width);
-//     if (canvas.width < 1200) {
-//         ballWidth = 24;
-//     }
-//     for (let i = 0; i < 6; i++) {
-//         var radius =
-//             (Math.floor(generateRandom(3, 5) * ballWidth) + 5) * 2,
-//             x, y,
-//             dx = (Math.random() - 0.5) * 50,
-//             dy = -28,
-//             color = 'rgba(47,117,255,' + generateRandom(6, 9) / 10 + ')'
-//         ballsArr.push(new Ball(x, y, dx, dy, radius, color))
-//     }
-// }
+const animate = () => {
+    let s = scaleFactor;
 
-// function animate() {
-//     window.requestAnimationFrame(animate);
-//     c.clearRect(0, 0, canvas.width, canvas.height);
-//     for (let i = 0; i < ballsArr.length; i++) {
-//         ballsArr[i].update()
-//     }
-// }
+    window.requestAnimationFrame(animate);
+    ctx.clearRect(0, 0, canvas.width * s, canvas.height * s);
 
-// animate();
-
-// class Ball {
-//     constructor(x, y, dx, dy, radius, color, stroke) {
-//         this._x = canvas.width / 2
-//         this._y = canvas.height / 2
-//         this._dx = dx
-//         this._dy = dy
-//         this._radius = radius
-//         this._color = color
-//     }
-
-//     draw() {
-//         c.beginPath()
-//         c.arc(this._x, this._y, this._radius, 0, Math.PI * 2)
-//         c.fillStyle = this._color
-//         c.fill()
-//         c.closePath()
-//     }
-
-//     update() {
-//         if (this._y + this._radius + this._dy > canvas.height) {
-//             this._dy = -this._dy * friction
-//             this._dx = this._dx * friction
-
-//         } else {
-//             this._dy += gravity
-//             this._radius = this._radius
-
-//         }
-//         if (this._x + this._radius > canvas.width || this._x - this._radius < 0) this._dx = -this._dx
-//         if (this._dy < 0.5 && this._dy > -5.5)
-//             this._dy = 0;
-//         if (Math.abs(this._dx) < 2.1)
-//             this._dx = 0;
-
-//         this._y += this._dy
-//         this._x += this._dx
-//         this.draw()
-//     }
-// }
+    for (let i = 0; i < iconArry.length; i++) {
+        iconArry[i].update()
+    }
+    // console.log(iconArry[0]._acceleration);
+}
+animate();

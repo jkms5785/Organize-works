@@ -128,7 +128,7 @@ const loadTodo = () => {
     if (localStorage.getItem(`todoArry`)) {
         let loaded = JSON.parse(localStorage.getItem(`todoArry`));
         todoArry = loaded;
-        console.log(todoArry);
+        // console.log(todoArry);
 
         if (todoArry.length !== 0) {
             todoArry.forEach(item => {
