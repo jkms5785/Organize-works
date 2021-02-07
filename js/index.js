@@ -16,7 +16,14 @@ txtarea.rows = "1";
 txtarea.style.height = "32px";
 txtarea.addEventListener(`keyup`, e => autoSizeTextarea(txtarea, 32));
 
-let icons = [`1`, `2`, `3`, `4`, `5`];
+let icons = [`📮`, `🔨`, `👀`, `👻`, `📌`, `🧷`, `🖊`, `🕓`, `🔥`, `🎱`, `🤔`, `💩`];
+
+const makeRandomIcon = () => {
+    let max = 10;
+    let min = 1;
+    return icons[Math.floor(Math.random() * (max - min + 1)) + min];
+}
+
 
 const pushTodo = () => {
     if (txtarea.value) {
@@ -36,21 +43,15 @@ const pushTodo = () => {
             txtarea.value = "";
         }
 
-        makeTodo(todoArry.length + 1, txt, txtMemo, `set`);
+        makeTodo(todoArry.length + 1, null, txt, txtMemo, `set`);
 
-        while (memoCont.hasChildNodes()){
-             memoCont.removeChild(memoCont.lastChild);
+        while (memoCont.hasChildNodes()) {
+            memoCont.removeChild(memoCont.lastChild);
         }
     }
 }
 
-const makeRandomIcon = () => {
-    let max = 5;
-    let min = 1;
-    return Math.floor(Math.random() * (max - min + 1)) + min;
-}
-
-const makeTodo = (idx, txt, memo, setOrRead) => {
+const makeTodo = (idx, emoji, txt, memo, setOrRead) => {
     if (todoArry.length == 0) {
         todoCont.children[0].remove();
     }
@@ -63,7 +64,7 @@ const makeTodo = (idx, txt, memo, setOrRead) => {
     li.id = idx;
     li.appendChild(icon);
     li.appendChild(txtCont);
-    li.addEventListener(`click`,finishWork);
+    li.addEventListener(`click`, finishWork);
 
     txtCont.appendChild(title);
 
@@ -79,12 +80,18 @@ const makeTodo = (idx, txt, memo, setOrRead) => {
     }
 
     txtCont.classList.add(`txt-cont`);
-
     icon.classList.add(`icon`);
-    icon.innerHTML = makeRandomIcon(); // icon 바꾸기
+
+    if (emoji) {
+        icon.innerHTML = emoji
+    } else {
+        icon.innerHTML = makeRandomIcon(); // icon 바꾸기
+    }
+
     title.classList.add(`-h2`);
     title.classList.add(`todo-title`);
     title.innerHTML = txt;
+
 
     todoCont.appendChild(li);
 
@@ -93,6 +100,7 @@ const makeTodo = (idx, txt, memo, setOrRead) => {
 
         let todoObj = {
             id: todoArry.length + 1,
+            emoji: icon.innerHTML,
             title: txt,
             body: memo
         };
@@ -115,7 +123,6 @@ const loadIx = (end) => {
     let i = 0;
     let interval = setInterval(() => {
         if (i < end) {
-            // console.log(i);
             todoCont.children[i].classList.add(`test`); // 바꾸기
             i++
         } else if (i == end) {
@@ -132,7 +139,7 @@ const loadTodo = () => {
 
         if (todoArry.length !== 0) {
             todoArry.forEach(item => {
-                makeTodo(item.id, item.title, item.body, `read`);
+                makeTodo(item.id, item.emoji, item.title, item.body, `read`);
             });
         }
         loadIx(todoArry.length);
@@ -186,6 +193,8 @@ const showDelBtn = () => {
         editBtn.innerHTML = edit_before;
     }
 }
+
+delAllBtn.classList.add(`hide`);
 
 const showDelAllBtn = () => {
     delAllBtn.classList.toggle(`hide`);

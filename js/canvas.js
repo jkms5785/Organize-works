@@ -15,7 +15,7 @@ let canvas = document.createElement("canvas");
 canvas.style.position = "fixed";
 canvas.style.top = "0";
 canvas.style.left = "0";
-// canvas.style.opacity = "0";
+canvas.style.zIndex = "-9999";
 canvasParent.appendChild(canvas);
 
 // 2-1. canvas.style 설정
@@ -58,16 +58,6 @@ const makeRanNum = (max, min) => {
     return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
-// 3. canavas 그리기
-// function makeCanvas() {
-//     let c = ctx;
-//     let s = scaleFactor;
-
-//     c.fillStyle = 'rgba(0, 0, 200, 0.5)';
-//     c.fillRect(0, 0, window.innerWidth * s, window.innerHeight * s);
-// }
-
-// makeCanvas();
 // resize 좌표 유지
 // window.addEventListener("resize", makeCanvas);
 
@@ -87,35 +77,32 @@ const makeRanNum = (max, min) => {
 
 let iconArry = [];
 let iconNum = 48;
-let limit = 64;
+let fontValue = Math.floor((window.innerWidth * scaleFactor) / 12);
+let delay = 20;
 
 class makeIcon {
-    constructor(x, y, dx, dy, acceleration, txt, direction) {
-        this._x = x
-        this._y = y
-        this._dx = dx
-        this._dy = dy
-        this._acceleration = acceleration
-        this._txt = txt
-        this._c = x
-        this._direction = direction
+    constructor(x, y, dy, acceleration, txt, opacity) {
+        this._x = x;
+        this._y = y;
+        this._dy = dy;
+        this._acceleration = acceleration;
+        this._txt = txt;
+        this._opacity = opacity;
+        this._opacityValue = 1;
     }
 
     draw() {
-        ctx.font = `120px Roboto`;
-        ctx.fillText(this._txt, this._x, this._y)
+        ctx.font = `${fontValue}px Roboto`;;
+        ctx.fillStyle = `rgba(0, 0, 0,${this._opacityValue}`;
+        ctx.fillText(this._txt, this._x, this._y);
     }
 
     update() {
-        this._y -= this._dy * this._acceleration
+        this._y = this._y - (this._dy + ((this._acceleration / 60) * 5));
+        ++this._acceleration;
 
-        if (this._x < this._c - limit) {
-            this._direction = 1;
-        } else if (this._x > this._c + limit) {
-            this._direction = -1;
-        }
-
-        this._x = this._x + (this._dx * this._direction);
+        this._opacityValue = (this._opacity + delay) * 0.01;
+        --this._opacity;
 
         this.draw();
     }
@@ -126,19 +113,15 @@ const iconPush = () => {
 
     for (let i = 0; i < iconNum; i++) {
         let x = makeRanNum(window.innerWidth * s, 0),
-            y = makeRanNum(window.innerHeight * s + 500, window.innerHeight * s),
-            dx = makeRanNum(4, 8),
-            dy = makeRanNum(6, 12),
-            acceleration = 1.5,
-            txt = `🔥`, // icon 받아올 자리
-            direction = 1;
-9.8 - 19.2 - 28.8
-        iconArry.push(new makeIcon(x, y, dx, dy, acceleration, txt, direction));
-    }
-    console.log(iconArry);
-}
+            y = makeRanNum(window.innerHeight * s + (fontValue * 8), window.innerHeight * s + fontValue),
+            dy = makeRanNum(6, 10),
+            acceleration = 2,
+            txt = `🔥`,
+            opacity = 100; // icon 받아올 자리
 
-iconPush();
+        iconArry.push(new makeIcon(x, y, dy, acceleration, txt, opacity));
+    }
+}
 
 const animate = () => {
     let s = scaleFactor;
@@ -149,6 +132,7 @@ const animate = () => {
     for (let i = 0; i < iconArry.length; i++) {
         iconArry[i].update()
     }
-    // console.log(iconArry[0]._acceleration);
 }
+
+iconPush();
 animate();
